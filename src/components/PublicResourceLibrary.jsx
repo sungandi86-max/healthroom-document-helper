@@ -121,6 +121,14 @@ const getPrimaryAction = (resource) => {
   return { label: '다운로드', disabled: false, url: resource.fileUrl };
 };
 
+const getStatusBadgeLabel = (resource) => {
+  if (!resource.fileUrl || resource.status === '링크 필요') {
+    return '준비중';
+  }
+
+  return null;
+};
+
 function FilterButton({ active, children, onClick }) {
   return (
     <button className={active ? 'filter-chip active' : 'filter-chip'} type="button" onClick={onClick}>
@@ -131,6 +139,7 @@ function FilterButton({ active, children, onClick }) {
 
 function ResourceCard({ resource }) {
   const action = getPrimaryAction(resource);
+  const statusBadgeLabel = getStatusBadgeLabel(resource);
   const tags = resource.tags
     .split(/[,\s#]+/)
     .map((tag) => tag.trim())
@@ -144,7 +153,7 @@ function ResourceCard({ resource }) {
           <p className="resource-category">{resource.category || '자료'}</p>
           <h3>{resource.title}</h3>
         </div>
-        <span className="status-badge">{resource.status}</span>
+        {statusBadgeLabel && <span className="status-badge">{statusBadgeLabel}</span>}
       </div>
 
       <p className="resource-work-area">{resource.workArea || '보건실 업무'}</p>
