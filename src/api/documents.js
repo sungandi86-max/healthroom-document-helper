@@ -3,6 +3,8 @@ import { getValue, isTrueValue, parseCsv } from './csv.js';
 const DOCUMENT_SHEET_CSV_URL =
   'https://docs.google.com/spreadsheets/d/1jUbcsbIjBuQ7aBfUBTKQ5s9uC7-VQ02x7WocRDmLb0o/gviz/tq?tqx=out:csv&sheet=%EA%B3%B5%EB%AC%B8%EC%9E%90%EB%A3%8C%EB%AA%A9%EB%A1%9D';
 
+const EXCLUDED_HELPER_PURPOSES = new Set(['가정통신문 발송', '인수인계서']);
+
 const hasTableLikePatterns = (text) => {
   const body = String(text || '');
   const lines = body
@@ -61,6 +63,7 @@ export const fetchDocumentReferences = async () => {
   return parseCsv(csvText)
     .filter((row) => isTrueValue(getValue(row, '사용여부')))
     .filter((row) => getValue(row, '상태') !== '보류')
+    .filter((row) => !EXCLUDED_HELPER_PURPOSES.has(getValue(row, '문서목적')))
     .map(normalizeDocument)
     .filter((document) => document.title);
 };

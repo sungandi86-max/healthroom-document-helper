@@ -2,11 +2,9 @@ export const DOCUMENT_TYPES = [
   '계획 기안',
   '결과 보고',
   '안내문 발송',
-  '가정통신문 발송',
   '실적 보고',
   '외부기관 제출',
   '품의',
-  '인수인계서',
 ];
 
 export const FIELD_OPTIONS = [
@@ -35,7 +33,6 @@ export const FIELD_OPTIONS = [
   '폭력예방교육 실적 보고',
   '아동학대 신고의무자 교육',
   '장애인학대 및 성범죄 신고의무자 교육',
-  '보건실 업무 인수인계서',
   '기타',
 ];
 
@@ -47,7 +44,7 @@ export const FORM_FIELDS = [
   { name: 'target', label: '대상', placeholder: '예: 1학년 학생 180명' },
   { name: 'dateTime', label: '일시', placeholder: '예: 2026. 6. 18.(목) 09:00~12:00' },
   { name: 'place', label: '장소', placeholder: '예: 각 반 교실 및 보건실' },
-  { name: 'method', label: '방법', placeholder: '예: 검진기관 방문 검진, 가정통신문 발송' },
+  { name: 'method', label: '방법', placeholder: '예: 검진기관 방문 검진, 보호자 안내문 배부' },
   { name: 'organization', label: '기관명', placeholder: '예: ○○검진기관' },
   { name: 'peopleCount', label: '인원', placeholder: '예: 학생 180명, 교직원 32명' },
   { name: 'budget', label: '비용 또는 예산', placeholder: '예: 비예산 또는 학교운영비 보건관리' },
