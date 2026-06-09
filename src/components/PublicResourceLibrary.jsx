@@ -122,7 +122,7 @@ const getPrimaryAction = (resource) => {
 };
 
 const getStatusBadgeLabel = (resource) => {
-  if (!resource.fileUrl || resource.status === '링크 필요') {
+  if (!resource.fileUrl) {
     return '준비중';
   }
 
