@@ -50,7 +50,7 @@ export default function DocumentForm({ values, onChange, onGenerate, onReset, on
         <h2>기본 정보 입력</h2>
       </div>
       <p className="helper-text">
-        자주 쓰는 핵심 항목만 먼저 입력하세요. 세부 조건은 선택 입력에서 필요할 때만 펼쳐 작성할 수 있습니다.
+        자주 쓰는 항목만 먼저 입력해도 초안을 만들 수 있습니다. 선택 입력은 필요한 경우 펼쳐서 작성하세요.
       </p>
 
       <div className="form-grid">{primaryFields.map((field) => renderField(field, values, handleChange))}</div>

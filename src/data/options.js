@@ -29,27 +29,25 @@ export const FIELD_OPTIONS = [
   '현장체험학습 개인 상비약 안내',
   '폭력예방교육 실적 보고',
   '아동학대 신고의무자 교육 결과 보고',
-  '성희롱·성폭력 고충상담원 교육 이수 보고',
   '결핵검진 이행 점검 결과 제출',
-  '보건실 운영 실적 및 성과 보고',
   '보건실 업무 인수인계서',
   '기타',
 ];
 
 export const FORM_FIELDS = [
   { name: 'schoolYear', label: '학년도', placeholder: '예: 2026학년도' },
-  { name: 'schoolName', label: '학교명', placeholder: '예: ○○초등학교' },
+  { name: 'schoolName', label: '학교명', placeholder: '예: ○○고등학교' },
   { name: 'relatedDocument', label: '관련 공문', placeholder: '예: 교육지원청 보건교육과-0000(2026.3.2.)' },
-  { name: 'workName', label: '제목 키워드 또는 업무명', placeholder: '예: 2,3학년 소변검사 시행계획' },
-  { name: 'target', label: '대상', placeholder: '예: 2,3학년 학생 180명' },
+  { name: 'workName', label: '제목 키워드 또는 업무명', placeholder: '예: 1학년 건강검진 시행계획' },
+  { name: 'target', label: '대상', placeholder: '예: 1학년 학생 180명' },
   { name: 'dateTime', label: '일시', placeholder: '예: 2026. 6. 18.(목) 09:00~12:00' },
   { name: 'place', label: '장소', placeholder: '예: 각 반 교실 및 보건실' },
-  { name: 'method', label: '방법', placeholder: '예: 검사기관 방문 검사, 담임교사 협조 안내' },
+  { name: 'method', label: '방법', placeholder: '예: 검진기관 방문 검진, 가정통신문 발송' },
   { name: 'organization', label: '기관명', placeholder: '예: ○○검진기관' },
   { name: 'peopleCount', label: '인원', placeholder: '예: 학생 180명, 교직원 32명' },
   { name: 'budget', label: '비용 또는 예산', placeholder: '예: 비예산 또는 학교운영비 보건관리' },
-  { name: 'mainContent', label: '주요 내용', placeholder: '예: 사전 안내, 당일 검사 운영, 결과 확인 및 추후관리' },
-  { name: 'attachments', label: '붙임 자료', placeholder: '예: 소변검사 안내 가정통신문, 검사 확인증' },
+  { name: 'mainContent', label: '주요 내용', placeholder: '예: 사전 안내, 당일 운영, 결과 확인 및 추후관리' },
+  { name: 'attachments', label: '붙임 자료', placeholder: '예: 안내문, 확인서, 결과 집계표' },
   { name: 'notes', label: '특이사항', placeholder: '예: 미검자는 추후 별도 안내 예정' },
 ];
 

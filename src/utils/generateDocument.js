@@ -6,12 +6,11 @@ const PURPOSE_ENDING = {
   '안내문 발송': '안내문을 발송하고자 합니다.',
   '가정통신문 발송': '가정통신문을 발송하고자 합니다.',
   '실적 보고': '실적을 다음과 같이 보고합니다.',
-  '외부기관 제출': '점검 결과를 다음과 같이 제출합니다.',
-  인수인계서: '업무 인수인계 내용을 다음과 같이 정리합니다.',
+  '외부기관 제출': '결과를 다음과 같이 제출합니다.',
+  인수인계서: '내용을 다음과 같이 정리합니다.',
 };
 
 const clean = (value) => String(value || '').trim();
-
 const valueOrNeed = (value) => clean(value) || '[입력 필요]';
 
 const optionalLine = (label, value) => {
@@ -64,8 +63,8 @@ const buildBody = ({ formValues, documentType, template }) => {
     optionalLine('마. 기관명', formValues.organization),
     optionalLine('바. 인원', formValues.peopleCount),
     optionalLine('사. 비용 또는 예산', formValues.budget),
-    optionalLine('아. 주요내용', formValues.mainContent),
-    optionalLine('자. 기타사항', formValues.notes),
+    optionalLine('아. 주요 내용', formValues.mainContent),
+    optionalLine('자. 특이사항', formValues.notes),
   ].filter(Boolean);
 
   const attachmentNames = splitAttachments(formValues.attachments);
@@ -78,7 +77,7 @@ const buildBody = ({ formValues, documentType, template }) => {
     '',
     `2. ${intro}`,
     '',
-    detailLines.length ? detailLines.join('\n') : '가. 세부내용: [입력 필요]',
+    detailLines.length ? detailLines.join('\n') : '가. 세부 내용: [입력 필요]',
     '',
     `붙임  ${attachmentText}  끝.`,
   ].join('\n');
@@ -105,7 +104,7 @@ export const getExampleValues = (selectedField) => {
     schoolName: '○○고등학교',
     relatedDocument: '교육지원청 보건교육과-0000',
     target: '해당 학년 학생 전체',
-    place: '각 학급 및 보건실',
+    place: '각 교실 및 보건실',
     organization: '○○검진기관',
     peopleCount: '학생 180명, 교직원 32명',
     budget: '비예산',

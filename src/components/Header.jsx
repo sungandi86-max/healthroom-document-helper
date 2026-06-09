@@ -14,10 +14,10 @@ export default function Header() {
         </div>
       </div>
       <p className="subtitle">
-        보건실 업무에 맞는 계획 기안, 결과 보고, 안내문 발송, 실적 보고 초안을 빠르게 정리해요.
+        보건실 공문 초안 작성과 공개자료 검색을 한 곳에서 처리할 수 있는 실무형 도구입니다.
       </p>
       <a className="hub-link" href={APP_CONFIG.hubUrl}>
-        ← {APP_CONFIG.hubName}로
+        {APP_CONFIG.hubName}로 이동
       </a>
     </header>
   );

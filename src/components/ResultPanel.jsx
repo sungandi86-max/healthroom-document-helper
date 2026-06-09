@@ -29,18 +29,17 @@ export default function ResultPanel({ result, onCopied }) {
         <div className="empty-result">
           <div className="empty-result-inner">
             <p>
-              왼쪽에서 문서 목적과 보건업무 분야를 선택한 뒤 기본 정보를 입력하고{' '}
+              왼쪽에서 문서 목적과 보건업무 분야를 선택하고 기본 정보를 입력한 뒤{' '}
               <strong>[문서 초안 생성]</strong>을 눌러 주세요.
             </p>
-            <p>생성 후에는</p>
+            <p>생성 후에는 아래 항목을 순서대로 확인할 수 있습니다.</p>
             <ol>
               <li>공문 제목</li>
               <li>기안문 본문</li>
               <li>붙임 목록</li>
-              <li>교직원 메신저</li>
+              <li>교직원 메신저 안내문</li>
               <li>기안 전 체크리스트</li>
             </ol>
-            <p>가 순서대로 표시됩니다.</p>
           </div>
         </div>
       ) : (
