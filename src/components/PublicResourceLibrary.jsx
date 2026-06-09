@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { getValue, isTrueValue, parseCsv } from '../api/csv.js';
 
 const RESOURCE_CSV_URL =
   'https://docs.google.com/spreadsheets/d/1jUbcsbIjBuQ7aBfUBTKQ5s9uC7-VQ02x7WocRDmLb0o/gviz/tq?tqx=out:csv&sheet=%EA%B3%B5%EA%B0%9C%EC%9E%90%EB%A3%8C%EB%AA%A9%EB%A1%9D';
@@ -8,62 +9,6 @@ const POPULAR_KEYWORDS = ['건강검진', '결핵검진', '감염병', '가정�
 const CATEGORY_FILTERS = [ALL, '가정통신문', '서식', '계획서 템플릿', '연수자료', '시트형 도구', '관리자료'];
 const FILE_TYPE_FILTERS = [ALL, 'HWP', 'HWPX', 'PPTX', 'PDF', 'Google Docs', 'Google Sheets'];
 const DELIVERY_FILTERS = [ALL, '다운로드', '사본 만들기', '링크 제공', '미리보기'];
-
-const getValue = (row, names) => {
-  const nameList = Array.isArray(names) ? names : [names];
-  const matchedName = nameList.find((name) => Object.prototype.hasOwnProperty.call(row, name));
-  return matchedName ? String(row[matchedName] || '').trim() : '';
-};
-
-const isTrueValue = (value) =>
-  ['true', 'TRUE', 'Y', 'y', '1', '예', '사용', '표시'].includes(String(value || '').trim());
-
-const parseCsv = (csvText) => {
-  const rows = [];
-  let currentRow = [];
-  let currentCell = '';
-  let insideQuotes = false;
-
-  for (let index = 0; index < csvText.length; index += 1) {
-    const char = csvText[index];
-    const nextChar = csvText[index + 1];
-
-    if (char === '"' && insideQuotes && nextChar === '"') {
-      currentCell += '"';
-      index += 1;
-    } else if (char === '"') {
-      insideQuotes = !insideQuotes;
-    } else if (char === ',' && !insideQuotes) {
-      currentRow.push(currentCell);
-      currentCell = '';
-    } else if ((char === '\n' || char === '\r') && !insideQuotes) {
-      if (char === '\r' && nextChar === '\n') {
-        index += 1;
-      }
-      currentRow.push(currentCell);
-      rows.push(currentRow);
-      currentRow = [];
-      currentCell = '';
-    } else {
-      currentCell += char;
-    }
-  }
-
-  if (currentCell || currentRow.length > 0) {
-    currentRow.push(currentCell);
-    rows.push(currentRow);
-  }
-
-  const headers = (rows.shift() || []).map((header) => header.trim());
-  return rows
-    .filter((row) => row.some((cell) => String(cell || '').trim()))
-    .map((row) =>
-      headers.reduce((entry, header, index) => {
-        entry[header] = String(row[index] || '').trim();
-        return entry;
-      }, {}),
-    );
-};
 
 const normalizeResource = (row, index) => {
   const title = getValue(row, ['자료명', '제목']);
@@ -76,7 +21,8 @@ const normalizeResource = (row, index) => {
   const deliveryType = getValue(row, ['제공방식', '제공형태']);
   const fileUrl = getValue(row, ['파일URL', '다운로드URL', '자료URL']);
   const previewUrl = getValue(row, ['미리보기URL', 'previewURL']);
-  const status = getValue(row, ['상태']) || '공개';
+  const password = getValue(row, ['비밀번호', 'password']);
+  const status = getValue(row, ['상태']) || '사용 가능';
   const priority = getValue(row, ['우선순위', '추천우선순위']);
 
   return {
@@ -91,6 +37,7 @@ const normalizeResource = (row, index) => {
     deliveryType,
     fileUrl,
     previewUrl,
+    password,
     status,
     priority,
     searchableText: [title, description, category, workArea, tags, searchKeywords].join(' ').toLowerCase(),
@@ -121,14 +68,6 @@ const getPrimaryAction = (resource) => {
   return { label: '다운로드', disabled: false, url: resource.fileUrl };
 };
 
-const getStatusBadgeLabel = (resource) => {
-  if (!resource.fileUrl) {
-    return '준비중';
-  }
-
-  return null;
-};
-
 function FilterButton({ active, children, onClick }) {
   return (
     <button className={active ? 'filter-chip active' : 'filter-chip'} type="button" onClick={onClick}>
@@ -139,7 +78,7 @@ function FilterButton({ active, children, onClick }) {
 
 function ResourceCard({ resource }) {
   const action = getPrimaryAction(resource);
-  const statusBadgeLabel = getStatusBadgeLabel(resource);
+  const showPendingBadge = !resource.fileUrl;
   const tags = resource.tags
     .split(/[,\s#]+/)
     .map((tag) => tag.trim())
@@ -153,7 +92,10 @@ function ResourceCard({ resource }) {
           <p className="resource-category">{resource.category || '자료'}</p>
           <h3>{resource.title}</h3>
         </div>
-        {statusBadgeLabel && <span className="status-badge">{statusBadgeLabel}</span>}
+        <div className="badge-stack">
+          {showPendingBadge && <span className="status-badge">준비중</span>}
+          {resource.password && <span className="status-badge subtle">비밀번호 필요</span>}
+        </div>
       </div>
 
       <p className="resource-work-area">{resource.workArea || '보건실 업무'}</p>
@@ -267,7 +209,7 @@ export default function PublicResourceLibrary() {
   );
 
   const recommendedResources = useMemo(
-    () => resources.filter((resource) => resource.priority === '높음').slice(0, 4),
+    () => resources.filter((resource) => resource.priority === '높음').slice(0, 3),
     [resources],
   );
 

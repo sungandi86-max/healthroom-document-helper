@@ -114,6 +114,14 @@ export const TEMPLATES = [
     checklist: ['확진 학생이 특정되지 않도록 표현을 점검합니다.'],
   }),
   createTemplate({
+    id: 'supply-purchase',
+    label: '보건실 물품 구입',
+    purpose: '보건실 의약품 및 운영 물품 구입을 위한 예산 집행',
+    action: '품의',
+    attachments: ['구입 물품 목록', '견적서'],
+    checklist: ['품목, 수량, 예산 과목을 확인합니다.'],
+  }),
+  createTemplate({
     id: 'training-report',
     label: '폭력예방교육 실적 보고',
     purpose: '폭력예방교육 실시 결과와 증빙자료 정리',

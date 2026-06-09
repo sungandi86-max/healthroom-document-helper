@@ -4,11 +4,12 @@ import PrivacyNotice from './components/PrivacyNotice.jsx';
 import DocumentTypeTabs from './components/DocumentTypeTabs.jsx';
 import FieldSelect from './components/FieldSelect.jsx';
 import DocumentForm from './components/DocumentForm.jsx';
+import ReferenceDocuments from './components/ReferenceDocuments.jsx';
 import ResultPanel from './components/ResultPanel.jsx';
 import Toast from './components/Toast.jsx';
 import PublicResourceLibrary from './components/PublicResourceLibrary.jsx';
 import { DEFAULT_FORM_VALUES, DOCUMENT_TYPES, FIELD_OPTIONS } from './data/options.js';
-import { generateDocument, getExampleValues } from './utils/generateDocument.js';
+import { applyReferenceDocument, generateDocument, getExampleValues } from './utils/generateDocument.js';
 
 const VIEWS = [
   { id: 'helper', label: '공문·보고서 도우미' },
@@ -49,6 +50,18 @@ export default function App() {
     showToast('예시를 불러왔습니다.');
   };
 
+  const handleApplyReference = (reference) => {
+    setResult(
+      applyReferenceDocument({
+        reference,
+        formValues,
+        documentType,
+        selectedField,
+      }),
+    );
+    showToast('참고 공문을 적용했습니다.');
+  };
+
   return (
     <div className="app-shell">
       <Header />
@@ -79,6 +92,11 @@ export default function App() {
                   onGenerate={handleGenerate}
                   onReset={handleReset}
                   onLoadExample={handleLoadExample}
+                />
+                <ReferenceDocuments
+                  documentType={documentType}
+                  selectedField={selectedField}
+                  onApply={handleApplyReference}
                 />
               </div>
               <ResultPanel result={result} onCopied={() => showToast('복사했습니다.')} />

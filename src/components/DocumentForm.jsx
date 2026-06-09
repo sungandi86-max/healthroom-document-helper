@@ -77,7 +77,7 @@ export default function DocumentForm({ values, onChange, onGenerate, onReset, on
           문서 초안 생성
         </button>
         <button className="secondary-button" type="button" onClick={onLoadExample}>
-          예시 불러오기
+          예시값 입력
         </button>
         <button className="ghost-button" type="button" onClick={onReset}>
           초기화
