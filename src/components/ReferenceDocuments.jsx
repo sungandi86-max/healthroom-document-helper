@@ -41,11 +41,6 @@ function ReferenceCard({ reference, onApply }) {
         <button className="primary-button resource-link" type="button" onClick={() => onApply(reference)}>
           이 자료 적용
         </button>
-        {reference.sourceUrl && (
-          <a className="secondary-button resource-link" href={reference.sourceUrl} target="_blank" rel="noreferrer">
-            원문 열기
-          </a>
-        )}
       </div>
     </article>
   );

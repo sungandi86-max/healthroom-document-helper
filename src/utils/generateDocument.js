@@ -1,7 +1,7 @@
 import { DEFAULT_CHECKLIST, findTemplateByLabel } from '../data/templates.js';
 
 export const TABLE_NOTICE =
-  '이 참고 공문에는 표 또는 현황 자료가 포함되어 있어 앱 화면에서는 표가 정확히 재현되지 않을 수 있습니다. 원문을 열어 표 형식을 확인한 뒤 필요한 부분을 복사해 주세요.';
+  '이 참고 공문에는 표 또는 현황 자료가 포함되어 있어 앱 화면에서는 표 형식이 정확히 재현되지 않을 수 있습니다. 필요한 표는 내부 보관 자료를 확인해 주세요.';
 
 const PURPOSE_ENDING = {
   '계획 기안': '시행하고자 합니다.',
@@ -183,7 +183,7 @@ const replaceTableLikeBlock = (body) => {
 
     if (looksLikeTableLine) {
       if (!insertedNotice) {
-        cleanedLines.push('[표/현황 자료는 원문 참조]');
+        cleanedLines.push('[표/현황 자료는 내부 보관 자료 확인]');
         insertedNotice = true;
       }
       return;
@@ -205,9 +205,10 @@ export const applyReferenceDocument = ({ reference, formValues, documentType, se
 
   return {
     sourceLabel: '참고자료 기반 초안',
-    sourceUrl: reference.sourceUrl,
     hasTable: reference.hasTable,
     tableNotice: reference.hasTable ? TABLE_NOTICE : '',
+    tableCopyText: reference.hasTable ? clean(reference.tableCopyBody) : '',
+    tableCopyGuide: reference.hasTable ? clean(reference.tableCopyGuide) : '',
     title: title || fallback.title,
     body: body || fallback.body,
     attachments: clean(reference.attachmentExample) || fallback.attachments,

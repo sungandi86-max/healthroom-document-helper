@@ -49,10 +49,16 @@ export default function ResultPanel({ result, onCopied }) {
       ) : (
         <div className="result-sections">
           {result.sourceLabel && <div className="source-label">{result.sourceLabel}</div>}
-          {result.sourceUrl && result.hasTable && (
-            <a className="secondary-button source-open-link" href={result.sourceUrl} target="_blank" rel="noreferrer">
-              원문 열기
-            </a>
+          {result.tableCopyText && (
+            <div className="table-copy-box">
+              <div>
+                <strong>표 복사용 본문</strong>
+                <p>{result.tableCopyGuide || '버튼을 누르면 스프레드시트에 붙여넣기 좋은 탭 구분 텍스트가 복사됩니다.'}</p>
+              </div>
+              <CopyButton text={result.tableCopyText} onCopied={onCopied} variant="wide">
+                표 복사
+              </CopyButton>
+            </div>
           )}
           {sections.map(([label, key]) => (
             <article className={key === 'tableNotice' ? 'result-section table-notice-section' : 'result-section'} key={key}>
