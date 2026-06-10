@@ -195,30 +195,82 @@ const replaceTableLikeBlock = (body) => {
   return cleanedLines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
 };
 
+const REFERENCE_RELATED_PLACEHOLDER = '[관련 공문번호 또는 관련 근거]';
+
+const getSafeSchoolName = (formValues) => clean(formValues.schoolName) || '○○고등학교';
+
+const getSafeRelatedDocument = (formValues) =>
+  clean(formValues.relatedDocument) || REFERENCE_RELATED_PLACEHOLDER;
+
+const replaceActualSchoolNames = (text, formValues) => {
+  const safeSchoolName = getSafeSchoolName(formValues);
+  return clean(text)
+    .replace(/세화여자고등학교/g, safeSchoolName)
+    .replace(/세화여고/g, safeSchoolName)
+    .replace(/[가-힣]{2,}(?:초등학교|중학교|고등학교)/g, (matched) => {
+      if (matched === safeSchoolName || matched === '○○고등학교') {
+        return matched;
+      }
+      return safeSchoolName;
+    });
+};
+
+const replaceDocumentNumberPatterns = (text) =>
+  clean(text)
+    .replace(/[가-힣A-Za-z·\s]+-\d{2,}\s*\([^)]*\)/g, '[관련 공문번호]')
+    .replace(/[가-힣A-Za-z·\s]+-\d{2,}/g, '[관련 공문번호]');
+
+const anonymizeReferenceText = (text, formValues, options = {}) => {
+  const safeRelatedDocument = getSafeRelatedDocument(formValues);
+  const lines = replaceActualSchoolNames(text, formValues).split(/\r?\n/);
+  let hasRelatedLine = false;
+  const anonymizedLines = lines.map((line) => {
+    if (options.replaceRelatedLine && /^\s*(?:\d+\.\s*)?관련\s*[:：]/.test(line)) {
+      hasRelatedLine = true;
+      return `관련: ${safeRelatedDocument}`;
+    }
+    return replaceDocumentNumberPatterns(line);
+  });
+
+  if (options.replaceRelatedLine && !hasRelatedLine) {
+    anonymizedLines.unshift(`관련: ${safeRelatedDocument}`, '');
+  }
+
+  return anonymizedLines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+};
+
 export const applyReferenceDocument = ({ reference, formValues, documentType, selectedField }) => {
   const baseTitle = clean(formValues.workName) || reference.title;
   const title = [clean(formValues.schoolYear), baseTitle].filter(Boolean).join(' ');
   const bodyFromReference = applyUserFieldsToReferenceBody(reference.templateBody, formValues);
-  const body = reference.hasTable ? replaceTableLikeBlock(bodyFromReference) : bodyFromReference;
+  const anonymizedBodyFromReference = anonymizeReferenceText(bodyFromReference, formValues, {
+    replaceRelatedLine: true,
+  });
+  const body = reference.hasTable ? replaceTableLikeBlock(anonymizedBodyFromReference) : anonymizedBodyFromReference;
   const template = findTemplateByLabel(selectedField);
   const fallback = generateDocument({ documentType, selectedField, formValues });
+  const attachmentExample = anonymizeReferenceText(reference.attachmentExample, formValues);
+  const messengerExample = anonymizeReferenceText(reference.messengerExample, formValues);
+  const checklist = anonymizeReferenceText(reference.checklist, formValues);
+  const tableCopyBody = anonymizeReferenceText(reference.tableCopyBody, formValues);
+  const tableCopyGuide = anonymizeReferenceText(reference.tableCopyGuide, formValues);
 
   return {
     sourceLabel: '참고자료 기반 초안',
     hasTable: reference.hasTable,
     tableNotice: reference.hasTable ? TABLE_NOTICE : '',
-    tableCopyText: reference.hasTable ? clean(reference.tableCopyBody) : '',
-    tableCopyGuide: reference.hasTable ? clean(reference.tableCopyGuide) : '',
+    tableCopyText: reference.hasTable ? tableCopyBody : '',
+    tableCopyGuide: reference.hasTable ? tableCopyGuide : '',
     title: title || fallback.title,
     body: body || fallback.body,
-    attachments: clean(reference.attachmentExample) || fallback.attachments,
+    attachments: attachmentExample || fallback.attachments,
     messenger:
-      clean(reference.messengerExample) ||
+      messengerExample ||
       applyTemplate(template.messengerBodyTemplate, {
         ...formValues,
         workName: baseTitle || reference.title,
       }),
-    checklist: clean(reference.checklist) || fallback.checklist,
+    checklist: checklist || fallback.checklist,
   };
 };
 
