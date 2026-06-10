@@ -97,6 +97,8 @@ function onOpen() {
     .addItem('추출 결과 로그 보기', 'showPdfImportLogSheet')
     .addItem('폴더 ID 설정 안내', 'showPdfImportFolderIdGuide')
     .addToUi();
+
+  addAiDocumentCleanupMenu_();
 }
 
 function importAllPdfDocumentsToSheet() {

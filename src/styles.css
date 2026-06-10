@@ -732,6 +732,29 @@ button:disabled,
   background: #fff8d9;
 }
 
+.table-copy-box {
+  display: grid;
+  gap: 10px;
+  border: 1px solid #c6e3dc;
+  border-radius: 8px;
+  padding: 12px;
+  background: #f3fbf8;
+}
+
+.table-copy-box strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #0b625c;
+  font-size: 0.9rem;
+}
+
+.table-copy-box p {
+  margin-bottom: 0;
+  color: #4d6675;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
 .resource-note {
   border-top: 1px solid #e5efed;
   padding-top: 9px;
