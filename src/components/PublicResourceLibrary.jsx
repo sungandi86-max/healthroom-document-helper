@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { getValue, isTrueValue, parseCsv } from '../api/csv.js';
+import UsageNotice from './UsageNotice.jsx';
 
 const RESOURCE_CSV_URL =
   'https://docs.google.com/spreadsheets/d/1jUbcsbIjBuQ7aBfUBTKQ5s9uC7-VQ02x7WocRDmLb0o/gviz/tq?tqx=out:csv&sheet=%EA%B3%B5%EA%B0%9C%EC%9E%90%EB%A3%8C%EB%AA%A9%EB%A1%9D';
@@ -131,7 +132,11 @@ function ResourceCard({ resource }) {
         )}
       </div>
 
-      <p className="resource-note">학교 상황에 맞게 수정 후 사용하세요.</p>
+      <p className="resource-note">
+        {resource.deliveryType === '사본 만들기'
+          ? '사본을 만든 뒤 학교 상황에 맞게 수정해 사용하세요. 개인정보와 민감정보는 입력하지 마세요.'
+          : '학교 상황에 맞게 수정 후 사용하세요.'}
+      </p>
     </article>
   );
 }
@@ -280,6 +285,8 @@ export default function PublicResourceLibrary() {
           </div>
         </div>
       </div>
+
+      <UsageNotice />
 
       {loadState.status === 'loading' && <div className="library-message">공개자료를 불러오는 중입니다.</div>}
       {loadState.status === 'error' && <div className="library-message error">{loadState.message}</div>}

@@ -8,6 +8,7 @@ import ReferenceDocuments from './components/ReferenceDocuments.jsx';
 import ResultPanel from './components/ResultPanel.jsx';
 import Toast from './components/Toast.jsx';
 import PublicResourceLibrary from './components/PublicResourceLibrary.jsx';
+import FooterNotice from './components/FooterNotice.jsx';
 import { DEFAULT_FORM_VALUES, DOCUMENT_TYPES, FIELD_OPTIONS } from './data/options.js';
 import { applyReferenceDocument, generateDocument, getExampleValues } from './utils/generateDocument.js';
 
@@ -107,7 +108,7 @@ export default function App() {
         )}
       </main>
 
-      <footer>© 쑤캥T 보건실 공문·보고서 도우미 · 개인 업무용 문서 작성 도구</footer>
+      <FooterNotice showUsage />
       <Toast message={toast} />
     </div>
   );

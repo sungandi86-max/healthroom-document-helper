@@ -156,28 +156,45 @@ main {
 }
 
 .privacy-notice,
+.usage-notice,
 .section-card {
   border: 1px solid #d7e9e7;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.92);
 }
 
-.privacy-notice {
+.privacy-notice,
+.usage-notice {
   display: grid;
   gap: 6px;
   padding: 14px;
   color: #264758;
 }
 
-.privacy-notice strong {
+.privacy-notice strong,
+.usage-notice strong {
   color: #0f6760;
   font-size: 0.92rem;
 }
 
-.privacy-notice p {
+.privacy-notice p,
+.usage-notice p {
   margin-bottom: 0;
   font-size: 0.9rem;
   line-height: 1.55;
+}
+
+.usage-notice {
+  background: #fbfefe;
+}
+
+.usage-notice.compact {
+  gap: 5px;
+  padding: 12px;
+}
+
+.usage-notice.compact p {
+  font-size: 0.84rem;
 }
 
 .workspace-grid {
@@ -895,11 +912,20 @@ pre {
   word-break: keep-all;
 }
 
-footer {
-  padding: 18px 0 4px;
+.footer-notice {
+  display: grid;
+  gap: 4px;
+  border-top: 1px solid #d7e9e7;
+  margin-top: 8px;
+  padding: 18px 12px 4px;
   color: #66808b;
   font-size: 0.82rem;
+  line-height: 1.55;
   text-align: center;
+}
+
+.footer-notice p {
+  margin-bottom: 0;
 }
 
 .toast {
