@@ -16,6 +16,9 @@ export default function Header() {
       <p className="subtitle">
         보건실 공문 초안 작성과 공개자료 검색을 한 곳에서 처리할 수 있는 실무형 도구입니다.
       </p>
+      <div className="header-character">
+        <img src="/otter-health-teacher.png" alt="수달 보건교사 캐릭터" />
+      </div>
     </header>
   );
 }

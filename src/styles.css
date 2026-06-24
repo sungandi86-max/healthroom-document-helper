@@ -58,8 +58,9 @@ button {
 
 .app-header {
   display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
-  align-items: start;
+  align-items: center;
   padding: 18px 0 16px;
 }
 
@@ -105,11 +106,32 @@ h1 {
 }
 
 .subtitle {
+  grid-column: 1 / 2;
   max-width: 720px;
   margin-bottom: 0;
   color: #4d6675;
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+.header-character {
+  grid-column: 2 / 3;
+  grid-row: 1 / span 2;
+  align-self: center;
+  width: 68px;
+  height: 68px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 14px 30px rgba(16, 56, 76, 0.14);
+}
+
+.header-character img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .hub-link {
@@ -952,11 +974,12 @@ pre {
   }
 
   .subtitle {
-    grid-column: 1 / -1;
+    grid-column: 1 / 2;
   }
 
-  .hub-link {
-    align-self: center;
+  .header-character {
+    width: 94px;
+    height: 94px;
   }
 
   .tab-grid {
