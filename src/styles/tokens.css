@@ -1,0 +1,26 @@
+:root {
+  --sh-primary: #2563eb;
+  --sh-primary-hover: #1d4ed8;
+  --sh-primary-soft: #eff6ff;
+  --sh-success: #16a34a;
+  --sh-success-soft: #ecfdf3;
+  --sh-warning: #f59e0b;
+  --sh-warning-soft: #fffbeb;
+  --sh-error: #dc2626;
+  --sh-error-soft: #fef2f2;
+  --sh-background: #f3f7fb;
+  --sh-background-muted: #eaf1f8;
+  --sh-surface: #ffffff;
+  --sh-surface-subtle: #f8fbff;
+  --sh-border: #dbe7f3;
+  --sh-border-strong: #bfd1e4;
+  --sh-text: #172033;
+  --sh-text-muted: #5f7084;
+  --sh-text-subtle: #7a8ba0;
+  --sh-shadow: 0 12px 32px rgba(23, 32, 51, 0.06);
+  --sh-shadow-soft: 0 8px 22px rgba(23, 32, 51, 0.045);
+  --sh-radius-sm: 12px;
+  --sh-radius-md: 16px;
+  --sh-radius-lg: 20px;
+  --sh-radius-xl: 24px;
+}

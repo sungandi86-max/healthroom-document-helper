@@ -1039,3 +1039,230 @@ pre {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* School Health Design System visual theme */
+:root {
+  color: var(--sh-text);
+  background: var(--sh-background);
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 28rem),
+    linear-gradient(180deg, var(--sh-background) 0%, #f8fbff 48%, #ffffff 100%);
+}
+
+.app-shell {
+  padding-top: 18px;
+}
+
+.app-header {
+  border: 1px solid var(--sh-border);
+  border-radius: var(--sh-radius-xl);
+  margin-bottom: 14px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: var(--sh-shadow-soft);
+}
+
+.logo-mark {
+  border-color: rgba(37, 99, 235, 0.22);
+  border-radius: var(--sh-radius-md);
+  background: var(--sh-primary-soft);
+  color: var(--sh-primary);
+}
+
+.eyebrow,
+.resource-category {
+  color: var(--sh-primary);
+}
+
+h1,
+.library-search-panel h2 {
+  color: var(--sh-text);
+}
+
+.subtitle,
+.library-search-help,
+.resource-section-heading p,
+.reference-card-header p,
+.reference-description,
+.resource-description,
+.table-copy-box p,
+.helper-text {
+  color: var(--sh-text-muted);
+}
+
+.header-character {
+  border-color: var(--sh-border);
+  background: var(--sh-surface);
+  box-shadow: var(--sh-shadow-soft);
+}
+
+.hub-link,
+.view-button,
+.tab-button,
+.ghost-button,
+.copy-button,
+.optional-toggle,
+.popular-keywords button,
+.filter-chip {
+  border-color: var(--sh-border);
+  border-radius: var(--sh-radius-sm);
+  background: var(--sh-surface);
+  color: var(--sh-text);
+}
+
+.view-button.active,
+.tab-button.active,
+.primary-button,
+.copy-button.wide {
+  border-color: var(--sh-primary);
+  background: var(--sh-primary);
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.16);
+}
+
+.primary-button:hover,
+.copy-button.wide:hover,
+.view-button.active:hover,
+.tab-button.active:hover {
+  border-color: var(--sh-primary-hover);
+  background: var(--sh-primary-hover);
+}
+
+.secondary-button {
+  border-color: rgba(37, 99, 235, 0.22);
+  border-radius: var(--sh-radius-sm);
+  background: var(--sh-primary-soft);
+  color: var(--sh-primary);
+}
+
+.privacy-notice,
+.usage-notice,
+.section-card,
+.library-search-panel,
+.library-filters,
+.resource-section,
+.library-message,
+.no-results {
+  border-color: var(--sh-border);
+  border-radius: var(--sh-radius-lg);
+  background: var(--sh-surface);
+  box-shadow: var(--sh-shadow-soft);
+}
+
+.section-card,
+.resource-section,
+.library-search-panel {
+  padding: 18px;
+}
+
+.privacy-notice strong,
+.usage-notice strong,
+.section-heading h2,
+.resource-section-heading h2,
+.resource-card h3,
+.reference-card h3,
+.result-section-title h3,
+.empty-result strong {
+  color: var(--sh-text);
+}
+
+.step-badge {
+  border-radius: var(--sh-radius-sm);
+  background: var(--sh-primary-soft);
+  color: var(--sh-primary);
+}
+
+select,
+input,
+textarea {
+  border-color: var(--sh-border);
+  border-radius: var(--sh-radius-sm);
+  background: var(--sh-surface);
+  color: var(--sh-text);
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  border-color: var(--sh-primary);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.optional-fields,
+.result-section-title,
+.resource-note {
+  border-color: var(--sh-border);
+}
+
+.optional-toggle {
+  background: var(--sh-surface-subtle);
+}
+
+.optional-toggle span:last-child {
+  background: var(--sh-primary-soft);
+  color: var(--sh-primary);
+}
+
+.resource-card,
+.reference-card,
+.result-section,
+.table-copy-box,
+.empty-result {
+  border-color: var(--sh-border);
+  border-radius: var(--sh-radius-md);
+  background: var(--sh-surface);
+}
+
+.result-section-title,
+.empty-result,
+.table-copy-box,
+.library-filters,
+.resource-meta span {
+  background: var(--sh-surface-subtle);
+}
+
+.status-badge {
+  border-color: rgba(22, 163, 74, 0.26);
+  background: var(--sh-success-soft);
+  color: var(--sh-success);
+}
+
+.status-badge.subtle,
+.tag-row span {
+  border-color: var(--sh-border);
+  background: var(--sh-surface);
+  color: var(--sh-text-muted);
+}
+
+.table-badge,
+.table-notice-section .result-section-title {
+  border-color: rgba(245, 158, 11, 0.28);
+  background: var(--sh-warning-soft);
+  color: #92400e;
+}
+
+.library-message.error {
+  border-color: rgba(220, 38, 38, 0.24);
+  background: var(--sh-error-soft);
+  color: var(--sh-error);
+}
+
+.source-label {
+  border-color: rgba(37, 99, 235, 0.22);
+  background: var(--sh-primary-soft);
+  color: var(--sh-primary);
+}
+
+.footer-notice {
+  border-color: var(--sh-border);
+  color: var(--sh-text-subtle);
+}
+
+.toast {
+  border-color: var(--sh-primary);
+  border-radius: var(--sh-radius-md);
+  background: var(--sh-primary);
+}

@@ -1,5 +1,5 @@
 export const APP_CONFIG = {
-  appName: '보건실 공문·보고서 도우미',
+  appName: '공문도우미',
 };
 
 export const NOTICE_TEXT = {
